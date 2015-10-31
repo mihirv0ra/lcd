@@ -2,4 +2,4 @@
 
 LightningCD is currently under development - Please check back later
 
-![LightningCD](/media/lightningcd.png =100x20)
+<img src="/media/lightningcd.png" width="600" height="400" alt="LightningCD"/>
