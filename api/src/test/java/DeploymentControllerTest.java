@@ -19,6 +19,7 @@ import org.springframework.mock.web.MockServletContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -88,5 +89,16 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
                     .contentType(contentType)
                     .content(jsonString));
         }
+
+    @Test
+    public void getApplication() throws Exception {
+        ResultActions actions = mockMvc.perform(get("/getApplication")
+                .param("applicationName", "abcdApplication")
+                .contentType(contentType))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.applicationName").value("abcdApplication"));
+    }
+
     }
 
