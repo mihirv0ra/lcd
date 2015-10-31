@@ -24,9 +24,9 @@
   <developers>
     <developer>
       <name>Amit Mawkin</name>
-      <email>amit.mawkin@capitalone.com</email>
-      <organization>CapitalOne</organization>
-      <organizationUrl>http://www.capitalone.com</organizationUrl>
+        <email>amit.mawkin@gmail.com</email>
+        <organization>LightningCD</organization>
+        <organizationUrl>https://lightningcd.github.io</organizationUrl>
     </developer>
   </developers>
 
