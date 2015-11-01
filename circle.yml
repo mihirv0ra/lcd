@@ -2,9 +2,8 @@ test:
   pre:
     - pwd
     - echo $CIRCLE_ARTIFACTS
-    - echo $CIRCLE_TEST_REPORT
   post:
     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
     - find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
     - mkdir -p $CIRCLE_ARTIFACTS/cobertura/
-    - find . -type f -regex ".*/target/surefire-reports/cobertura/*" -exec cp {} $CIRCLE_ARTIFACTS/cobertura/ \;
+    - cp -r $HOME/lcd/api/target/surefire-reports/cobertura $CIRCLE_ARTIFACTS/cobertura
