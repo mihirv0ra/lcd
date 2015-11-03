@@ -52,7 +52,7 @@ public interface DeployApplicationService {
      * @param provisioningTypes to Update
      * @return updated deployApplication instance
      */
-    String update(String applicationName, Environment[] environments, Component[] components, String provisioningTypes) throws DeployApplicationNotFoundException;
+    String update(ObjectId id, String applicationName, Environment[] environments, Component[] components, String provisioningTypes) throws DeployApplicationNotFoundException;
 
     /**
      * Deletes an existing DeployApplication instance.
@@ -64,5 +64,5 @@ public interface DeployApplicationService {
     /**
      * Deletes an existing deployApplication instance
      */
-    void delete(String applicationName);
+    String delete(String applicationName);
 }

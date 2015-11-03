@@ -79,13 +79,15 @@ public class DeployApplicationServiceImpl implements DeployApplicationService {
      * @return updated deployApplication instance
      */
     @Override
-    public String update(String applicationName, Environment[] environments, Component[] components, String provisioningTypes) throws DeployApplicationNotFoundException {
-        DeployApplication deployApplication = deployApplicationRepository.findByApplicationName(applicationName);
+    public String update(ObjectId id, String applicationName, Environment[] environments, Component[] components, String provisioningTypes) throws DeployApplicationNotFoundException {
+        DeployApplication deployApplication = deployApplicationRepository.findOne(id);
         if (null != deployApplication) {
+            System.out.println("applicationName at saving time:" + applicationName);
             deployApplication.setApplicationName(applicationName);
             deployApplication.setEnvironments(environments);
             deployApplication.setComponent(components);
             deployApplication.setProvisioningTypes(provisioningTypes);
+
             deployApplicationRepository.save(deployApplication);
             return deployApplication.getApplicationName();
         } else {
@@ -112,10 +114,10 @@ public class DeployApplicationServiceImpl implements DeployApplicationService {
      * @param applicationName
      */
     @Override
-    public void delete(String applicationName) {
+    public String delete(String applicationName) {
 
         DeployApplication deployApplication = deployApplicationRepository.findByApplicationName(applicationName);
         deployApplicationRepository.delete(deployApplication);
-
+        return deployApplication.getApplicationName();
     }
 }

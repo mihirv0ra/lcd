@@ -6,12 +6,16 @@ import com.lightningcd.api.model.DeployApplication;
 import com.lightningcd.api.model.Environment;
 import com.lightningcd.api.rest.DeployApplicationController;
 import static org.hamcrest.Matchers.equalTo;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import org.bson.types.ObjectId;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.http.MediaType;
@@ -24,6 +28,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import javax.xml.transform.Result;
 import java.nio.charset.Charset;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -36,6 +41,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @RunWith(SpringJUnit4ClassRunner.class)
     @SpringApplicationConfiguration(classes = Application.class)
     @WebAppConfiguration
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
     public class DeploymentControllerTest {
 
         private MockMvc mockMvc;
@@ -81,23 +87,54 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
            return json;
        }
 
-        @Test
-        public void createApplication() throws Exception {
-            String jsonString=getJSON(deployApplication);
-            System.out.println(jsonString);
-            mockMvc.perform(post("/createApplication")
-                    .contentType(contentType)
-                    .content(jsonString));
-        }
-
     @Test
-    public void getApplication() throws Exception {
+    public void Test1GetApplication() throws Exception {
         ResultActions actions = mockMvc.perform(get("/getApplication")
                 .param("applicationName", "abcdApplication")
                 .contentType(contentType))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.applicationName").value("abcdApplication"));
+    }
+
+    @Test
+    public void Test2DeleteApplication() throws Exception {
+        mockMvc.perform(get("/deleteApplication")
+                .param("applicationName", "abcdApplication"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("abcdApplication"));
+    }
+
+    @Test
+    public void Test3CreateApplication() throws Exception {
+            String jsonString=getJSON(deployApplication);
+            System.out.println(jsonString);
+            mockMvc.perform(post("/createApplication")
+                    .contentType(contentType)
+                    .content(jsonString))
+                    .andExpect(status().isOk());
+        }
+
+    @Test
+    public void Test4UpdateApplication() throws Exception {
+        ResultActions actions = mockMvc.perform(get("/getObjectIdfromApplicationName")
+                .param("applicationName", "abcdApplication")
+                .contentType(contentType));
+        System.out.println(actions.andReturn().getResponse().getContentAsString());
+        ObjectId ids = new ObjectId(actions.andReturn().getResponse().getContentAsString());
+
+        deployApplication.setId(ids);
+        deployApplication.setApplicationName("amitApplication");
+
+        String jsonString = getJSON(deployApplication);
+        System.out.println(jsonString);
+        ResultActions actions2 = mockMvc.perform(put("/updateApplication")
+                .contentType(contentType)
+                .content(jsonString))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+
+
     }
 
     }

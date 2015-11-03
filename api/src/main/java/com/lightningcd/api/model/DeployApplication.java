@@ -1,6 +1,7 @@
 package com.lightningcd.api.model;
 
 
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection="deployapplication")
@@ -10,8 +11,9 @@ public class DeployApplication extends BaseModel {
      * Model for defining what an application is
      * An Application consist of web component, app component and database component
      */
-
+    @Indexed(unique = true)
     private String applicationName;
+
     private Environment[] environments;
     private Component[] component;
     private String provisioningTypes;
