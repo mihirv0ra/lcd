@@ -7,3 +7,5 @@ test:
     - find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
     - mkdir -p $CIRCLE_ARTIFACTS/cobertura/
     - cp -r $HOME/lcd/api/target/surefire-reports/cobertura $CIRCLE_ARTIFACTS/cobertura
+    - pip install --user codecov
+    - codecov --token=$CODECOV_TOKEN

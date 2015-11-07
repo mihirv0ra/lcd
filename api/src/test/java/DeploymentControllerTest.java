@@ -44,8 +44,11 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
     public class DeploymentControllerTest {
 
-        private MockMvc mockMvc;
+    private MockMvc mockMvc;
     private DeployApplication deployApplication=new DeployApplication();
+    String jsonString = "";
+
+
 
         @Autowired
         private WebApplicationContext webApplicationContext;
@@ -56,10 +59,9 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 
         @Before
         public void setUp() throws Exception {
-
             Environment environment = new Environment();
-            environment.setEnvironmentName("QA");
             Component component=new Component();
+            environment.setEnvironmentName("QA");
             component.setComponentName("abcdweb");
             component.setComponentType("web");
             component.setComponentVersion("1.0.0.0");
@@ -67,12 +69,10 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
             component.setMemory("512M");
             Environment[] env={environment};
             Component[] comp={component};
-
             deployApplication.setApplicationName("abcdApplication");
             deployApplication.setEnvironments(env);
             deployApplication.setComponent(comp);
             deployApplication.setProvisioningTypes("ssh");
-
             this.mockMvc = webAppContextSetup(webApplicationContext).build();
 
             }
@@ -88,26 +88,9 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
        }
 
     @Test
-    public void Test1GetApplication() throws Exception {
-        ResultActions actions = mockMvc.perform(get("/getApplication")
-                .param("applicationName", "abcdApplication")
-                .contentType(contentType))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.applicationName").value("abcdApplication"));
-    }
+    public void Test1CreateApplication() throws Exception {
 
-    @Test
-    public void Test2DeleteApplication() throws Exception {
-        mockMvc.perform(get("/deleteApplication")
-                .param("applicationName", "abcdApplication"))
-                .andExpect(status().isOk())
-                .andExpect(content().string("abcdApplication"));
-    }
-
-    @Test
-    public void Test3CreateApplication() throws Exception {
-            String jsonString=getJSON(deployApplication);
+        jsonString = getJSON(deployApplication);
             System.out.println(jsonString);
             mockMvc.perform(post("/createApplication")
                     .contentType(contentType)
@@ -116,7 +99,18 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
         }
 
     @Test
-    public void Test4UpdateApplication() throws Exception {
+    public void Test2GetApplication() throws Exception {
+        ResultActions actions = mockMvc.perform(get("/getApplication")
+                .param("applicationName", "abcdApplication")
+                .contentType(contentType))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.applicationName").value("abcdApplication"));
+    }
+
+
+    @Test
+    public void Test3UpdateApplication() throws Exception {
         ResultActions actions = mockMvc.perform(get("/getObjectIdfromApplicationName")
                 .param("applicationName", "abcdApplication")
                 .contentType(contentType));
@@ -135,6 +129,15 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON));
 
 
+    }
+
+    @Test
+    public void Test4DeleteApplication() throws Exception {
+
+        mockMvc.perform(get("/deleteApplication")
+                .param("applicationName", "abcdApplication"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("abcdApplication"));
     }
 
     }
