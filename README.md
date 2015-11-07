@@ -4,6 +4,7 @@
   <img alt="Coverity Scan Build Status"
        src="https://scan.coverity.com/projects/6926/badge.svg"/>
 </a>
+
 LightningCD is currently under development - Please check back later
 
 <img src="/media/lightningcd.png" width="600" height="400" alt="LightningCD"/>
