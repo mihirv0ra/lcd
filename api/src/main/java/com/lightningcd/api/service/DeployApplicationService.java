@@ -46,13 +46,9 @@ public interface DeployApplicationService {
     /**
      * Updates an existing deployapplication instance.
      *
-     * @param applicationName   to update
-     * @param environments      to update
-     * @param components        to update
-     * @param provisioningTypes to Update
      * @return updated deployApplication instance
      */
-    String update(ObjectId id, String applicationName, Environment[] environments, Component[] components, String provisioningTypes) throws DeployApplicationNotFoundException;
+    String update(DeployApplication newData) throws DeployApplicationNotFoundException;
 
     /**
      * Deletes an existing DeployApplication instance.

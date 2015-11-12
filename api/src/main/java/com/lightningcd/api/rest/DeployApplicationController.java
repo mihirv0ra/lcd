@@ -12,9 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -61,10 +59,11 @@ public class DeployApplicationController {
     }
 
 
-    @RequestMapping(value = "/updateApplication", method = PUT, consumes = JSON, produces = JSON)
-    public ResponseEntity<String> updateApplication(@Valid @RequestBody DeployApplication request) {
+    @RequestMapping(value = "/updateApplication", method = POST, consumes = JSON, produces = JSON)
+    public ResponseEntity<String> updateApplication(@Valid @RequestBody DeployApplication deployApplication) {
+        System.out.println("Provisioning is:" + deployApplication.getProvisioningTypes());
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(deployApplicationService.update(request.getId(), request.getApplicationName(), request.getEnvironments(), request.getComponent(), request.getProvisioningTypes()));
+            return ResponseEntity.status(HttpStatus.OK).body(deployApplicationService.update(deployApplication));
         } catch (DeployApplicationNotFoundException de) {
             return ResponseEntity.status(HttpStatus.OK).body("User Does Not Exist, Please choose another username");
         }
@@ -74,4 +73,9 @@ public class DeployApplicationController {
     public ResponseEntity<String> deleteApplication(@Valid String applicationName) {
         return ResponseEntity.status(HttpStatus.OK).body(deployApplicationService.delete(applicationName));
 }
+
+    @RequestMapping(value = "/deleteapplicationwithobjectid", method = GET)
+    public void deleteApplication(@Valid ObjectId objectid) {
+        deployApplicationService.delete(objectid);
     }
+}

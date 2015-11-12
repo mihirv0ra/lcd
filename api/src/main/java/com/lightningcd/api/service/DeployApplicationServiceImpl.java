@@ -72,23 +72,20 @@ public class DeployApplicationServiceImpl implements DeployApplicationService {
     /**
      * Updates an existing deployapplication instance.
      *
-     * @param applicationName   to update
-     * @param environments      to update
-     * @param components        to update
-     * @param provisioningTypes to Update
+     *
      * @return updated deployApplication instance
      */
     @Override
-    public String update(ObjectId id, String applicationName, Environment[] environments, Component[] components, String provisioningTypes) throws DeployApplicationNotFoundException {
-        DeployApplication deployApplication = deployApplicationRepository.findOne(id);
+    public String update(DeployApplication deployApplication) throws DeployApplicationNotFoundException {
         if (null != deployApplication) {
-            System.out.println("applicationName at saving time:" + applicationName);
-            deployApplication.setApplicationName(applicationName);
-            deployApplication.setEnvironments(environments);
-            deployApplication.setComponent(components);
-            deployApplication.setProvisioningTypes(provisioningTypes);
+            DeployApplication deployApplication1 = deployApplicationRepository.findByApplicationName(deployApplication.getApplicationName());
+            logger.info("DeployApplication ObjectId:" + deployApplication1.getId());
+            logger.info(deployApplication1.toString());
+            deployApplication1.setEnvironments(deployApplication.getEnvironments());
+            deployApplication1.setComponent(deployApplication.getComponent());
+            deployApplication1.setProvisioningTypes(deployApplication.getProvisioningTypes());
 
-            deployApplicationRepository.save(deployApplication);
+            deployApplicationRepository.save(deployApplication1);
             return deployApplication.getApplicationName();
         } else {
             throw new DeployApplicationNotFoundException("Application not found");

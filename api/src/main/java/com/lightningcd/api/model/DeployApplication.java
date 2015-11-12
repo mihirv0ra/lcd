@@ -1,8 +1,11 @@
 package com.lightningcd.api.model;
 
 
+import com.sun.javafx.beans.IDProperty;
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.annotation.Id;
 
 @Document(collection="deployapplication")
 public class DeployApplication extends BaseModel {
@@ -11,9 +14,10 @@ public class DeployApplication extends BaseModel {
      * Model for defining what an application is
      * An Application consist of web component, app component and database component
      */
+
+
     @Indexed(unique = true)
     private String applicationName;
-
     private Environment[] environments;
     private Component[] component;
     private String provisioningTypes;
@@ -61,6 +65,11 @@ public class DeployApplication extends BaseModel {
 
     public void setProvisioningTypes(String provisioningTypes) {
         this.provisioningTypes = provisioningTypes;
+    }
+
+    public String toString() {
+        return ("DeploymentApplication:" + "applicationName:" + applicationName + " environments:" + environments.toString() + " components:" +
+                component.toString() + " provisioningTypes:" + provisioningTypes);
     }
 }
 
