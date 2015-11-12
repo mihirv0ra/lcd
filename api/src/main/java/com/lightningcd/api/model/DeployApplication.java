@@ -1,7 +1,6 @@
 package com.lightningcd.api.model;
 
 
-import com.sun.javafx.beans.IDProperty;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
