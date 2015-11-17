@@ -31,7 +31,7 @@ public class DeployApplicationServiceImpl implements DeployApplicationService {
      */
     @Override
     public Iterable<DeployApplication> all() {
-        return null;
+        return deployApplicationRepository.findAll();
     }
 
     /**

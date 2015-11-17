@@ -1,16 +1,9 @@
+package com.lightningcd.api;
+
 import com.google.gson.Gson;
-import com.lightningcd.api.Application;
-import com.lightningcd.api.exception.DeployApplicationNotFoundException;
 import com.lightningcd.api.model.Component;
 import com.lightningcd.api.model.DeployApplication;
 import com.lightningcd.api.model.Environment;
-import com.lightningcd.api.rest.DeployApplicationController;
-import static org.hamcrest.Matchers.equalTo;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import org.bson.types.ObjectId;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -19,16 +12,12 @@ import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.http.MediaType;
-import org.springframework.mock.web.MockServletContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import javax.xml.transform.Result;
 import java.nio.charset.Charset;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -42,6 +31,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
     @SpringApplicationConfiguration(classes = Application.class)
     @WebAppConfiguration
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+
     public class DeploymentControllerTest {
 
     private MockMvc mockMvc;
@@ -76,7 +66,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 
             }
 
-       public String getJSON(Object obj)
+    private String getJSON(Object obj)
        {
            Gson gson = new Gson();
 
@@ -88,7 +78,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 
     @Test
     public void Test1CreateApplication() throws Exception {
-        System.out.println("Enter-DeploymentControllerTest.Test1CreateApplication");
+        System.out.println("Enter-com.lightningcd.api.DeploymentControllerTest.Test1CreateApplication");
         jsonString = getJSON(deployApplication);
             System.out.println(jsonString);
             mockMvc.perform(post("/createApplication")
@@ -100,12 +90,12 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
                 .param("applicationName", "abcdApplication")
                 .contentType(contentType));
         System.out.println(actions2.andReturn().getResponse().getContentAsString());
-        System.out.println("Exit-DeploymentControllerTest.Test1CreateApplication");
+        System.out.println("Exit-com.lightningcd.api.DeploymentControllerTest.Test1CreateApplication");
         }
 
     @Test
     public void Test2GetApplication() throws Exception {
-        System.out.println("Enter-DeploymentControllerTest.Test2GetApplication");
+        System.out.println("Enter-com.lightningcd.api.DeploymentControllerTest.Test2GetApplication");
         ResultActions actions = mockMvc.perform(get("/getApplication")
                 .param("applicationName", "abcdApplication")
                 .contentType(contentType))
@@ -116,13 +106,13 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
                 .param("applicationName", "abcdApplication")
                 .contentType(contentType));
         System.out.println(actions2.andReturn().getResponse().getContentAsString());
-        System.out.println("Exit-DeploymentControllerTest.Test2GetApplication");
+        System.out.println("Exit-com.lightningcd.api.DeploymentControllerTest.Test2GetApplication");
     }
 
 
     @Test
     public void Test3UpdateApplication() throws Exception {
-        System.out.println("Enter-DeploymentControllerTest.Test3UpdateApplication");
+        System.out.println("Enter-com.lightningcd.api.DeploymentControllerTest.Test3UpdateApplication");
         deployApplication.setProvisioningTypes("kubernetes");
         String jsonString = getJSON(deployApplication);
         System.out.println(jsonString);
@@ -138,18 +128,18 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.provisioningTypes").value("kubernetes"));
-        System.out.println("Exit-DeploymentControllerTest.Test3UpdateApplication");
+        System.out.println("Exit-com.lightningcd.api.DeploymentControllerTest.Test3UpdateApplication");
 
     }
 
     @Test
     public void Test4DeleteApplication() throws Exception {
-        System.out.println("Enter-DeploymentControllerTest.Test4DeleteApplication");
+        System.out.println("Enter-com.lightningcd.api.DeploymentControllerTest.Test4DeleteApplication");
         mockMvc.perform(get("/deleteApplication")
                 .param("applicationName", "abcdApplication"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("abcdApplication"));
-        System.out.println("Exit-DeploymentControllerTest.Test4DeleteApplication");
+        System.out.println("Exit-com.lightningcd.api.DeploymentControllerTest.Test4DeleteApplication");
     }
     }
 
