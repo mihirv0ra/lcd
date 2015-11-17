@@ -79,4 +79,43 @@ public class ProvisioningConfControllerTest {
 
 
     }
+
+    @Test
+    public void test2getProvisioningConf() throws Exception {
+        ResultActions actions = mockMvc.perform(get("/getProvisioningConf")
+                .param("applicationName", "abcdApplication")
+                .contentType(contentType))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.applicationName").value("abcdApplication"));
+
+    }
+
+    @Test
+    public void test3updateProvisioningConf() throws Exception {
+        ProvisionEnv provisionEnv1 = new ProvisionEnv();
+        provisionEnv1.setEnvironmentName("Dev");
+        provisionEnv1.setRestEndPoint(new URL("http://devendpoint.com"));
+        ProvisionEnv provisionEnv2 = new ProvisionEnv();
+        provisionEnv2.setEnvironmentName("Prod");
+        provisionEnv2.setRestEndPoint(new URL("http://prodendpoint.com"));
+        ProvisionEnv[] myprovisionEnv = {provisionEnv1, provisionEnv2};
+        provisioningConf.setRestEndPoint(myprovisionEnv);
+        String jsonString = getJSON(provisioningConf);
+        System.out.println(jsonString);
+        ResultActions actions2 = mockMvc.perform(post("/updateProvisioningConf")
+                .contentType(contentType)
+                .content(jsonString))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+    }
+
+    @Test
+    public void test4deleteProvisioningConf() throws Exception {
+        mockMvc.perform(get("/deleteProvisioningConf")
+                .param("applicationName", "abcdApplication"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("abcdApplication"));
+
+    }
 }
