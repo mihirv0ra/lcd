@@ -4,17 +4,19 @@ language: java
 jdk:
 - oraclejdk8
 
+
 env:
   global:
-    - secure: "qLQ1U9pEOEojU9LOzQp/diYi5oN79i6Vn6DpOl//u4aORQ2aP+CsHw1tMFWZW6gUo0Lg8clT8UJSRP7zOzdS+1X/kvH7FYb4lp6yRgLlELzjrg2JecruXBUUry8jAI9MJnEAraHR6vy6Tv0+LUgmrszONRwMu1sKEqU0xxc7lJPPg+rufAl2g68ve2gFn3iWaRPCmqao5sIHLlIsIJfK3s/u/AclbUOBd++uSm+RzW8LKYya5yUHj89DzJ4NM7w32G3JR79O/CHarusrCzFgdYbr7aQaVFxT0nC2DUbIMnlUlU+3jt2JihgglioBTZAt/KGkelVV6KPm0uDDZa827WjZazy9I3QFQ05I7yOw4qMDFBd1dXu7irnlx1jQlVoOpFdqMqodpAKgG4/A0TlibSDOC0/lPvteSu6tj4Eqn37Snk0aRXTBJyTpqaFT0SHdDeKWrhUV8w7WYNTupkFouO5Cv2iwCr7lSQAtAPpXUU5I8ZDY3200SWHWdwYbTw3ipwgRJsaOU+mNJP79T2J2R9Qr7bUe+4GsxqyW37Uo7vZM9rtaCNE9IHJs+0TfECRnEs9a4oy/IdtqZnkRPy5fHvP0TYFhoaq3oG8LlW+Z+Qeln1UAcxmnc8YNibgWtnfir0rEu9z62XIyoKWTsyp08ZEuTfeXoyIeY6nVRcpCnx0="
-    - MONGODB_VERSION=2.6.10
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "fwuDFOxqKhxFN9d9lETt55J69M+cGAAFgMC6f2EZxHg3MlDu0pB91sWLW4AL8hKOZNcl/L/jP9pmq59PKr+ZZzvdrTCrMvuYoJyRvZNjBMM/Efw4+5rrRIVP8GKXk7cw2xcT8w55jJqOUCjuYQmiYjgTnTTOtVsrypyYu3Newg3TxMB06UzQhV9QK96A/r4xx9edZuqlVQ3WCKM1kJeuxrlcTgdPdC7JGtLUcNokEbF3Ku/P6Iwl5OVZ2oC6MCRJaOCqSQgicGGSv2cfwqaPWbsdD2YqrYvX2+Ov/VDwdj5joc3Qz06LLMwyCfw6XvDOL45nFW21VhnaeHS0ZHY9tbzpLDA4YoJLeJ48z+2UgOOXivMQbssekzTbMD1Ecqyoe++W7MMGR3vSa6O1JvBTkf0vNe1eMUtzzor3oou6+ofPTOoDwBrx+eb8+S3+7/LC+9ZM629QrHTyTi0zLAZnwF+3VAa9gKGbnKEGilTwOEzh95am4GoTF7WHAUSxcyRQYlm8fYPCIQD0ZBnbqZ3wxc8Y2OW4GskRYGtcW8xBLhhcTpSn3fdQ5frWyt7UprF7LQaa4QI9HD23y0HfqLuLoNNM1YmCM+9O5B01S6K+bqKk9GxnuQkVg+9gfLl7lee9GVInCOWqmPgvDC+8fX107bomd04Nzvw4AMnxUJHBrS0="
+   - MONGODB_VERSION=2.6.10
 
 addons:
-    coverity_scan:
-      project:
-        name: amitmawkin/lcd
-
-      notification_email: amit.mawkin@capitalone.com
-      build_command_prepend: mvn clean
-      build_command: mvn -DskipTests=true compile
-      branch_pattern: coverity_scan
+  coverity_scan:
+    project:
+      name: "amitmawkin/lcd"
+    notification_email: amit.mawkin@capitalone.com
+    build_command_prepend: "mvn clean"
+    build_command:   "mvn -DskipTests=true compile"
+    branch_pattern: coverity_scan
