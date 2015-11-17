@@ -61,8 +61,8 @@ public class ProvisioningConfControllerTest {
         provisionEnv1.setEnvironmentName("Dev");
         provisionEnv1.setRestEndPoint(new URL("http://qaendpoint.com"));
         ProvisionEnv provisionEnv2 = new ProvisionEnv();
-        provisionEnv1.setEnvironmentName("Prod");
-        provisionEnv1.setRestEndPoint(new URL("http://prodendpoint.com"));
+        provisionEnv2.setEnvironmentName("Prod");
+        provisionEnv2.setRestEndPoint(new URL("http://prodendpoint.com"));
         ProvisionEnv[] myprovisionEnv = {provisionEnv1, provisionEnv2};
         provisioningConf = new ProvisioningConf(applicationName, myprovisionEnv);
         this.mockMvc = webAppContextSetup(webApplicationContext).build();

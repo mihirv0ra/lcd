@@ -8,7 +8,9 @@ import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ProvisioningConfServiceImpl implements ProvisioningConfService {
 
 
@@ -64,7 +66,8 @@ public class ProvisioningConfServiceImpl implements ProvisioningConfService {
     @Override
     public String create(ProvisioningConf provisioningConf) {
 
-        ProvisioningConf provisioningConf1 = provisioningConf;
+        ProvisioningConf provisioningConf1 = new ProvisioningConf(provisioningConf.getApplicationName(), provisioningConf.getRestEndPoint());
+        provisioningConfRepository.save(provisioningConf1);
         return provisioningConf1.getApplicationName();
     }
 

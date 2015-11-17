@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,13 +40,13 @@ public class ProvisioningConfController {
 
     @RequestMapping(value = "/createProvisioningConf", method = POST, consumes = JSON, produces = JSON)
     @ApiOperation(value = "Create Provisioning Configuration", nickname = "CreateProvisioningConf", response = String.class)
-    public ResponseEntity<String> createProvisioningConf(@Valid ProvisioningConf request) {
+    public ResponseEntity<String> createProvisioningConf(@Valid @RequestBody ProvisioningConf request) {
         return ResponseEntity.status(HttpStatus.OK).body(provisioiningConfService.create(request));
     }
 
     @RequestMapping(value = "/updateProvisioningConf", method = POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Update Provisioning Configuration", nickname = "UpdateProvisioningConf", response = String.class)
-    public ResponseEntity<String> updateProvisioningConf(@Valid ProvisioningConf request) {
+    public ResponseEntity<String> updateProvisioningConf(@Valid @RequestBody ProvisioningConf request) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(provisioiningConfService.update(request));
         } catch (ConfigurationNotFoundException e) {

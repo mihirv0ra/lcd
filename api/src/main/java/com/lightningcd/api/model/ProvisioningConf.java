@@ -11,6 +11,10 @@ public class ProvisioningConf extends BaseModel {
     private String applicationName;
     private ProvisionEnv[] restEndPoint;
 
+    public ProvisioningConf() {
+        super();
+    }
+
     public ProvisioningConf(String applicationName, ProvisionEnv[] restEndPoint) {
         this.applicationName = applicationName;
         this.restEndPoint = restEndPoint;
