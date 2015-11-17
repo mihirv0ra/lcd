@@ -1,3 +1,5 @@
+services:
+  - mongodb
 language: java
 jdk:
 - oraclejdk8
@@ -5,8 +7,7 @@ jdk:
 before_script:
   - sleep 15
 
-services:
-  - mongodb
+
 
 after_success:
 addons:
@@ -14,10 +15,11 @@ addons:
       project:
         name: amitmawkin/lcd
         description: Build submitted via Travis CI
-      notification_email: amit.mawkin@capitalone.com
-      build_command_prepend: mvn clean
-      build_command: mvn -DskipTests=true compile
-      branch_pattern: coverity_scan
+        notification_email: amit.mawkin@capitalone.com
+        build_command_prepend: mvn clean
+        build_command: mvn -DskipTests=true compile
+        branch_pattern: coverity_scan
 env:
   global:
       secure: qLQ1U9pEOEojU9LOzQp/diYi5oN79i6Vn6DpOl//u4aORQ2aP+CsHw1tMFWZW6gUo0Lg8clT8UJSRP7zOzdS+1X/kvH7FYb4lp6yRgLlELzjrg2JecruXBUUry8jAI9MJnEAraHR6vy6Tv0+LUgmrszONRwMu1sKEqU0xxc7lJPPg+rufAl2g68ve2gFn3iWaRPCmqao5sIHLlIsIJfK3s/u/AclbUOBd++uSm+RzW8LKYya5yUHj89DzJ4NM7w32G3JR79O/CHarusrCzFgdYbr7aQaVFxT0nC2DUbIMnlUlU+3jt2JihgglioBTZAt/KGkelVV6KPm0uDDZa827WjZazy9I3QFQ05I7yOw4qMDFBd1dXu7irnlx1jQlVoOpFdqMqodpAKgG4/A0TlibSDOC0/lPvteSu6tj4Eqn37Snk0aRXTBJyTpqaFT0SHdDeKWrhUV8w7WYNTupkFouO5Cv2iwCr7lSQAtAPpXUU5I8ZDY3200SWHWdwYbTw3ipwgRJsaOU+mNJP79T2J2R9Qr7bUe+4GsxqyW37Uo7vZM9rtaCNE9IHJs+0TfECRnEs9a4oy/IdtqZnkRPy5fHvP0TYFhoaq3oG8LlW+Z+Qeln1UAcxmnc8YNibgWtnfir0rEu9z62XIyoKWTsyp08ZEuTfeXoyIeY6nVRcpCnx0=
+      - MONGODB_VERSION=2.6.10
