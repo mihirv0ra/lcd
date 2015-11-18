@@ -4,6 +4,7 @@
   <img alt="Coverity Scan Build Status"
        src="https://scan.coverity.com/projects/6926/badge.svg"/>
 </a>
+[![Build Status](https://travis-ci.org/amitmawkin/lcd.svg?branch=master)](https://travis-ci.org/amitmawkin/lcd)
 
 LightningCD is currently under development - Please check back later
 
