@@ -19,7 +19,7 @@ addons:
     notification_email: amit.mawkin@capitalone.com
     build_command_prepend: "mvn clean"
     build_command:   "mvn -DskipTests=true compile"
-    branch_pattern: coverity_scan
+    branch_pattern:  master
 
 
 
