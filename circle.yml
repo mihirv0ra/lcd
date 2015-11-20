@@ -9,6 +9,6 @@ test:
     - cp -r $HOME/lcd/api/target/surefire-reports/cobertura $CIRCLE_ARTIFACTS/cobertura
     - pip install --user codecov
     - codecov --token=$CODECOV_TOKEN
-    - sudo curl http://www.jpm4j.org/install/script | sh
+    - sudo curl http://www.jpm4j.org/install/script | sudo sh
     - jpm install com.codacy:codacy-coverage-reporter:assembly
     - codacy-coverage-reporter -l Java -r coverage.xml
