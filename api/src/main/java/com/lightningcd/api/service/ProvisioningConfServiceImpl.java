@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 public class ProvisioningConfServiceImpl implements ProvisioningConfService {
 
 
-    private static final Logger logger = LoggerFactory.getLogger(DeployApplicationServiceImpl.class);
+    //    private static final Logger logger = LoggerFactory.getLogger(DeployApplicationServiceImpl.class);
     private final ProvisioningConfRepository provisioningConfRepository;
 
     @Autowired

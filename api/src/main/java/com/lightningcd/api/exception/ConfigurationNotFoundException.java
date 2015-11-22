@@ -1,8 +1,6 @@
 package com.lightningcd.api.exception;
 
 
-import java.security.PrivilegedActionException;
-
 public class ConfigurationNotFoundException extends Exception {
     /**
      * Constructs a new exception with {@code null} as its detail message.

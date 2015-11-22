@@ -11,4 +11,4 @@ test:
     - codecov --token=$CODECOV_TOKEN
     - sudo curl http://www.jpm4j.org/install/script | sudo sh
     - sudo jpm install com.codacy:codacy-coverage-reporter:assembly
-    - sudo codacy-coverage-reporter -l Java -r /home/ubuntu/lcd/api/target/surefire-reports/cobertura/coverage.xml -t $CODACY_PROJECT_TOKEN
+    #- sudo codacy-coverage-reporter -l Java -r /home/ubuntu/lcd/api/target/surefire-reports/cobertura/coverage.xml -t $CODACY_PROJECT_TOKEN
