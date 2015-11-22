@@ -6,11 +6,12 @@ test:
     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
     - find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
     - mkdir -p $CIRCLE_ARTIFACTS/cobertura/
-    - mkdi  -p $CIRCLE_ARTIFACTS/jacoco/
+    - mkdir -p $CIRCLE_ARTIFACTS/jacoco/
     - cp -r $HOME/lcd/api/target/surefire-reports/cobertura $CIRCLE_ARTIFACTS/cobertura
     - cp -r $HOME/lcd/api/target/site/jacoco $CIRCLE_ARTIFACTS/jacoco
     - pip install --user codecov
     - codecov --token=$CODECOV_TOKEN
-    - sudo curl http://www.jpm4j.org/install/script | sudo sh
+    - curl http://www.jpm4j.org/install/script > jpmInstall.sh
+    - sudo sh jpmInstall.sh
     - sudo jpm install com.codacy:codacy-coverage-reporter:assembly
-    - sudo codacy-coverage-reporter -l Java -r /home/ubuntu/lcd/api/target/site/jacoco/jacoco.xml -t $CODACY_PROJECT_TOKEN
+    - codacy-coverage-reporter -l Java -r target/site/jacoco/jacoco.xml
