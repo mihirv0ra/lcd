@@ -72,7 +72,7 @@ public class AuthenticationController {
     @ApiOperation(value = "Delete User", nickname = "DeleteUser", response = String.class)
     public ResponseEntity<String> deleteUser(@Valid @RequestBody String userName) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(authenticationService.delete(userName);
+            return ResponseEntity.status(HttpStatus.OK).body(authenticationService.delete(userName));
         } catch (UserNotFoundException ue) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User does not exist");
         }
