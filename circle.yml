@@ -12,6 +12,6 @@ test:
     - pip install --user codecov
     - codecov --token=$CODECOV_TOKEN
     - curl http://www.jpm4j.org/install/script > jpmInstall.sh
-    - sudo sh jpmInstall.sh
-    - sudo jpm install com.codacy:codacy-coverage-reporter:assembly
-    - codacy-coverage-reporter -l Java -r target/site/jacoco/jacoco.xml
+    #- sudo sh jpmInstall.sh
+    #- sudo jpm install com.codacy:codacy-coverage-reporter:assembly
+    #- codacy-coverage-reporter -l Java -r target/site/jacoco/jacoco.xml
