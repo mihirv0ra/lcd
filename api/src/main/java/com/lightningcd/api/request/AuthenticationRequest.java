@@ -9,7 +9,7 @@ public class AuthenticationRequest {
     private String username;
     @NotNull
     private String password;
-    @NotNull
+
     private String jsonWebToken;
 
     public String getUsername() {

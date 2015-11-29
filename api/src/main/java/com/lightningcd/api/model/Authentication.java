@@ -5,12 +5,16 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "authentication")
-public class Authentication {
+public class Authentication extends BaseModel {
 
     @Indexed(unique = true)
     private String username;
     private String password;
     private String jsonWebToken;
+
+    public Authentication() {
+//default constructor
+    }
 
     public Authentication(String username, String password) {
         this.username = username;

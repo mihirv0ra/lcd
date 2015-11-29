@@ -7,6 +7,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface AuthenticationRepository extends MongoRepository<Authentication, ObjectId> {
 
-    public Authentication findByUserName(String username);
+    Authentication findByUsername(String username);
 
 }
