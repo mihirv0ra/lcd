@@ -7,8 +7,6 @@ import com.lightningcd.api.model.Authentication;
 import com.lightningcd.api.service.AuthenticationService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -23,7 +21,7 @@ import java.io.IOException;
 @Api(value = "AuthenticationApi", description = "API for lcd authentication")
 public class AuthenticationController {
 
-    private static final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
+    //private static final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
     private AuthenticationService authenticationService;
     private static final String JSON = MediaType.APPLICATION_JSON_VALUE;
 
@@ -78,11 +76,13 @@ public class AuthenticationController {
     @ExceptionHandler({UserNotFoundException.class})
     @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "User does not exist")
     void handleBadRequests(HttpServletResponse response) throws IOException {
+        //Intentionally left empty
     }
 
     @ExceptionHandler({LoginFailedException.class})
     @ResponseStatus(value = HttpStatus.UNAUTHORIZED, reason = "Invalid Username or Password")
     void handleInvalidLoginRequests(HttpServletResponse response) throws IOException {
+        //Intentionally left empty
     }
 
 

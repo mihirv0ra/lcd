@@ -4,11 +4,15 @@ package com.lightningcd.api.model;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotNull;
+
 @Document(collection = "authentication")
 public class Authentication extends BaseModel {
 
     @Indexed(unique = true)
+    @NotNull
     private String username;
+    @NotNull
     private String password;
     private String jsonWebToken;
 
